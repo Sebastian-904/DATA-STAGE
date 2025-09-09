@@ -1,0 +1,5 @@
+{
+  "name": "Data Stage Consolidado",
+  "description": "Una herramienta para cargar archivos ZIP, procesar los datos contenidos y consolidarlos en un único reporte de Excel.",
+  "requestFramePermissions": []
+}
