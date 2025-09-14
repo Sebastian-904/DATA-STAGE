@@ -19,30 +19,30 @@ export const ProcessingSection: React.FC<ProcessingSectionProps> = ({ progress, 
 
     return (
         <section className="animate-fade-in">
-            <div className="bg-white rounded-xl shadow-md p-6">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Procesando archivos</h2>
+            <div className="bg-white rounded-xl shadow-md p-6 dark:bg-gray-800 dark:border dark:border-gray-700">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4 dark:text-gray-100">Procesando archivos</h2>
                 
                 <div className="mb-4">
                     <div className="flex justify-between mb-1">
-                        <span className="text-sm font-medium text-blue-700">Progreso general</span>
-                        <span className="text-sm font-medium text-blue-700">{progress.total}%</span>
+                        <span className="text-sm font-medium text-blue-700 dark:text-blue-400">Progreso general</span>
+                        <span className="text-sm font-medium text-blue-700 dark:text-blue-400">{progress.total}%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2.5 mb-2">
+                    <div className="w-full bg-gray-200 rounded-full h-2.5 mb-2 dark:bg-gray-700">
                         <div className="bg-blue-600 h-2.5 rounded-full transition-all duration-300" style={{ width: `${progress.total}%` }}></div>
                     </div>
                     
                     <div className="flex justify-between mb-1">
-                        <span className="text-sm font-medium text-gray-700">
+                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                             {progress.fileName ? `Procesando: ${progress.fileName}` : 'Archivo actual: Ninguno'}
                         </span>
-                        <span className="text-sm font-medium text-gray-700">{progress.file}%</span>
+                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{progress.file}%</span>
                     </div>
-                    <div className="w-full bg-gray-100 rounded-full h-2">
+                    <div className="w-full bg-gray-100 rounded-full h-2 dark:bg-gray-600">
                         <div className="bg-green-500 h-2 rounded-full transition-all duration-300" style={{ width: `${progress.file}%` }}></div>
                     </div>
                 </div>
                 
-                <div ref={logPanelRef} className="bg-gray-50 rounded-lg p-4 h-64 overflow-y-auto font-mono text-sm text-gray-700 border mb-6">
+                <div ref={logPanelRef} className="bg-gray-50 rounded-lg p-4 h-64 overflow-y-auto font-mono text-sm text-gray-700 border mb-6 dark:bg-black/50 dark:text-gray-300 dark:border-gray-600">
                     {logs.map((log, index) => (
                         <p key={index} className="break-words">&gt; {log}</p>
                     ))}

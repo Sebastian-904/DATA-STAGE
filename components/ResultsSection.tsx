@@ -18,11 +18,11 @@ export const ResultsSection: React.FC<ResultsSectionProps> = ({ data, onReset, m
 
     return (
         <section className="animate-fade-in">
-            <div className="bg-white rounded-xl shadow-md p-6">
+            <div className="bg-white rounded-xl shadow-md p-6 dark:bg-gray-800 dark:border dark:border-gray-700">
                 <div className="text-center">
-                    <i className="fas fa-check-circle text-5xl text-green-500 mb-4"></i>
-                    <h2 className="text-2xl font-semibold text-gray-800 mb-2">Archivos Procesados Exitosamente</h2>
-                    <p className="text-gray-600 mb-6">El archivo ZIP ha sido descomprimido y los datos están listos para ser descargados.</p>
+                    <i className="fas fa-check-circle text-5xl text-green-500 mb-4 dark:text-green-400"></i>
+                    <h2 className="text-2xl font-semibold text-gray-800 mb-2 dark:text-gray-100">Archivos Procesados Exitosamente</h2>
+                    <p className="text-gray-600 mb-6 dark:text-gray-300">El archivo ZIP ha sido descomprimido y los datos están listos para ser descargados.</p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
@@ -41,9 +41,9 @@ export const ResultsSection: React.FC<ResultsSectionProps> = ({ data, onReset, m
                 </div>
 
                 <div className="mb-8">
-                    <h3 className="text-lg font-medium text-gray-700 mb-3 border-b pb-2">Desglose de Archivos:</h3>
-                    <div className="max-h-48 overflow-y-auto bg-gray-50 p-3 rounded-md border">
-                        <ul className="list-disc list-inside space-y-1 text-gray-600">
+                    <h3 className="text-lg font-medium text-gray-700 mb-3 border-b pb-2 dark:text-gray-200 dark:border-gray-600">Desglose de Archivos:</h3>
+                    <div className="max-h-48 overflow-y-auto bg-gray-50 p-3 rounded-md border dark:bg-gray-700/50 dark:border-gray-600">
+                        <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
                             {processedFiles.map(fileKey => (
                                 <li key={fileKey}>
                                     <span className="font-semibold">{fileKey}.asc</span> ({FILE_NAMES[fileKey] || 'Desconocido'}) - {data[fileKey].length.toLocaleString()} registros.
@@ -53,8 +53,8 @@ export const ResultsSection: React.FC<ResultsSectionProps> = ({ data, onReset, m
                     </div>
                 </div>
 
-                <div className="border-t pt-6">
-                    <h3 className="text-lg font-medium text-gray-700 mb-4 text-center">Opciones de Descarga</h3>
+                <div className="border-t pt-6 dark:border-gray-700">
+                    <h3 className="text-lg font-medium text-gray-700 mb-4 text-center dark:text-gray-200">Opciones de Descarga</h3>
                     <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
                         <button 
                             onClick={() => generateSeparateSheetsExcelReport(data, month, year)} 
@@ -75,7 +75,7 @@ export const ResultsSection: React.FC<ResultsSectionProps> = ({ data, onReset, m
                     </div>
                 </div>
                 
-                <div className="mt-8 text-center border-t pt-6">
+                <div className="mt-8 text-center border-t pt-6 dark:border-gray-700">
                      <button 
                         onClick={onReset}
                         className="bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-6 rounded-lg transition-transform transform hover:scale-105 w-full sm:w-auto"

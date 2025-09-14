@@ -4,6 +4,11 @@ export enum AppState {
     RESULTS = 'RESULTS',
 }
 
+export enum ReportMode {
+    MONTHLY = 'MONTHLY',
+    ANNUAL = 'ANNUAL',
+}
+
 export interface ProgressState {
     total: number;
     file: number;

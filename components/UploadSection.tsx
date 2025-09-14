@@ -61,7 +61,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
     };
 
     const dropzoneClasses = `border-2 dashed rounded-lg p-8 text-center cursor-pointer transition-all duration-300 ease-in-out ${
-        isDragging ? 'border-green-500 bg-green-50' : 'border-blue-500 hover:border-blue-700 hover:bg-blue-50'
+        isDragging ? 'border-green-500 bg-green-50 dark:bg-green-900/50' : 'border-blue-500 hover:border-blue-700 hover:bg-blue-50 dark:border-gray-600 dark:hover:border-blue-500 dark:hover:bg-gray-800/50'
     }`;
 
     const handleContinue = () => {
@@ -79,20 +79,20 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
 
     return (
         <section className="animate-fade-in">
-            <div className="bg-white rounded-xl shadow-md p-6">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Carga de Archivo ZIP</h2>
-                <p className="text-gray-600 mb-6">Seleccione el periodo y suba el archivo ZIP que contiene sus archivos de datos (.asc) para procesarlos.</p>
+            <div className="bg-white rounded-xl shadow-md p-6 dark:bg-gray-800 dark:border dark:border-gray-700">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4 dark:text-gray-100">Carga de Archivo ZIP</h2>
+                <p className="text-gray-600 mb-6 dark:text-gray-300">Seleccione el periodo y suba el archivo ZIP que contiene sus archivos de datos (.asc) para procesarlos.</p>
 
-                <div className="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                    <h3 className="text-lg font-medium text-gray-700 mb-3">Periodo del Reporte</h3>
+                <div className="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-lg dark:bg-gray-700/50 dark:border-gray-600">
+                    <h3 className="text-lg font-medium text-gray-700 mb-3 dark:text-gray-200">Periodo del Reporte</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label htmlFor="month-select" className="block text-sm font-medium text-gray-600 mb-1">Mes</label>
+                            <label htmlFor="month-select" className="block text-sm font-medium text-gray-600 mb-1 dark:text-gray-300">Mes</label>
                             <select
                                 id="month-select"
                                 value={selectedMonth}
                                 onChange={(e) => onMonthChange(e.target.value)}
-                                className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             >
                                 {MONTH_NAMES.map(month => (
                                     <option key={month} value={month}>{month}</option>
@@ -100,12 +100,12 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
                             </select>
                         </div>
                         <div>
-                            <label htmlFor="year-select" className="block text-sm font-medium text-gray-600 mb-1">Año</label>
+                            <label htmlFor="year-select" className="block text-sm font-medium text-gray-600 mb-1 dark:text-gray-300">Año</label>
                             <select
                                 id="year-select"
                                 value={selectedYear}
                                 onChange={(e) => onYearChange(e.target.value)}
-                                className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             >
                                 {years.map(year => (
                                     <option key={year} value={year}>{year}</option>
@@ -124,9 +124,9 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
                             onDrop={handleDrop}
                             onClick={onButtonClick}
                         >
-                            <i className="fas fa-file-archive text-5xl text-blue-500 mb-4"></i>
-                            <p className="text-lg font-medium text-gray-700">Arrastre y suelte su archivo ZIP aquí</p>
-                            <p className="text-gray-500">o</p>
+                            <i className="fas fa-file-archive text-5xl text-blue-500 mb-4 dark:text-blue-400"></i>
+                            <p className="text-lg font-medium text-gray-700 dark:text-gray-200">Arrastre y suelte su archivo ZIP aquí</p>
+                            <p className="text-gray-500 dark:text-gray-400">o</p>
                             <button type="button" className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition">
                                 Seleccionar archivo
                             </button>
@@ -138,13 +138,13 @@ export const UploadSection: React.FC<UploadSectionProps> = ({
                                 onChange={handleFileChange}
                             />
                         </div>
-                        <p className="text-sm text-gray-500 mt-4">El archivo debe contener archivos de datos con extensión .asc.</p>
+                        <p className="text-sm text-gray-500 mt-4 dark:text-gray-400">El archivo debe contener archivos de datos con extensión .asc.</p>
                     </>
                 ) : (
-                     <div className="bg-blue-50 border-2 border-blue-500 rounded-lg p-6 text-center">
-                        <i className="fas fa-file-zipper text-5xl text-blue-600 mb-4"></i>
-                        <p className="text-lg font-medium text-gray-800">Archivo listo para procesar:</p>
-                        <p className="text-md text-gray-600 font-mono mb-6 break-all">{selectedFile.name}</p>
+                     <div className="bg-blue-50 border-2 border-blue-500 rounded-lg p-6 text-center dark:bg-gray-700/50 dark:border-blue-500/50">
+                        <i className="fas fa-file-zipper text-5xl text-blue-600 mb-4 dark:text-blue-400"></i>
+                        <p className="text-lg font-medium text-gray-800 dark:text-gray-100">Archivo listo para procesar:</p>
+                        <p className="text-md text-gray-600 font-mono mb-6 break-all dark:text-gray-300">{selectedFile.name}</p>
                         <div className="flex flex-col sm:flex-row justify-center gap-4">
                             <button 
                                 onClick={handleCancelSelection} 

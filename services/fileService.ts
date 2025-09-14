@@ -28,22 +28,23 @@ export const processZipFile = async (
     const totalFiles = files.length;
 
     for (let i = 0; i < totalFiles; i++) {
+        const fileName = files[i];
+        
+        // Check for cancellation before processing each file
         if (cancellationSignal.current) {
+            onLog('Proceso cancelado por el usuario.');
             throw new Error('Operation cancelled by user.');
         }
 
-        const fileName = files[i];
-        
         const nameWithoutExtension = fileName.split('.')[0];
         const parts = nameWithoutExtension.split('_');
         const fileNumber = parts[parts.length - 1];
 
         try {
-            onProgress({ total: Math.round(((i + 1) / totalFiles) * 100), file: 0, fileName });
+            onProgress({ total: Math.round(((i) / totalFiles) * 100), file: 0, fileName });
             onLog(`[${i + 1}/${totalFiles}] Procesando ${fileName}...`);
             
             const content = await zip.file(fileName).async('text');
-            onProgress({ total: Math.round(((i + 1) / totalFiles) * 100), file: 50, fileName });
 
             if (!content) {
                 onLog(`Advertencia: ${fileName} está vacío - Saltando...`);
@@ -55,6 +56,7 @@ export const processZipFile = async (
                 onLog(`Error de formato: El archivo ${fileName} no parece estar separado por pipes '|'.`);
                 continue;
             }
+            onProgress({ total: Math.round(((i) / totalFiles) * 100), file: 50, fileName });
 
             processedData[fileNumber] = lines.map(line => line.split('|'));
             onLog(`✅ ${fileName} procesado correctamente con ${lines.length} registros.`);
@@ -73,6 +75,34 @@ export const processZipFile = async (
 
     return processedData;
 };
+
+export const consolidateAnnualData = (
+    monthlyData: { month: string, data: ProcessedData }[],
+    onLog: (message: string) => void
+): ProcessedData => {
+    const consolidated: ProcessedData = {};
+
+    monthlyData.forEach(({ month, data }) => {
+        Object.entries(data).forEach(([fileKey, records]) => {
+            if (!consolidated[fileKey]) {
+                consolidated[fileKey] = [];
+                // Add header row with the new "Mes" column
+                if (records.length > 0) {
+                    const header = ['Mes', ...records[0]];
+                    consolidated[fileKey].push(header);
+                }
+            }
+            // Add month to each subsequent data row
+            const dataRows = records.slice(1);
+            const recordsWithMonth = dataRows.map(record => [month, ...record]);
+            consolidated[fileKey].push(...recordsWithMonth);
+        });
+    });
+    
+    onLog(`Consolidación finalizada. Total de tipos de archivo consolidados: ${Object.keys(consolidated).length}`);
+    return consolidated;
+};
+
 
 export const generateSeparateSheetsExcelReport = (data: ProcessedData, month: string, year: number) => {
     if (typeof XLSX === 'undefined') {
